@@ -1,0 +1,15 @@
+.PreviewCollectionListItem {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+
+  &__title {
+    font-size: 28px;
+    margin-bottom: 25px;
+  }
+
+  &__products {
+    display: flex;
+    justify-content: space-between;
+  }
+}
