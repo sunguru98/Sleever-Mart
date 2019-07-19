@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import FormInputComponent from './FormInputComponent'
 import CustomButton from './CustomButton'
 import '../styles/Signin.scss'
-import { signInWithGoogle } from '../firebase.config';
+import { auth, signInWithGoogle, createUserProfileDocument } from '../firebase.config';
 
 class SignIn extends Component {
   constructor(props) {
@@ -16,8 +16,11 @@ class SignIn extends Component {
     this.setState({ [event.target.name]: event.target.value })
   }
 
-  handleSubmit (event) {
+  async handleSubmit (event) {
     event.preventDefault()
+    try {
+      await auth.signInWithEmailAndPassword(this.state.email, this.state.password)
+    } catch (err) { alert('Oops. Invalid credentials') }
     this.setState({ email: '', password: '' })
   }
 

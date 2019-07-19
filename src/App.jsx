@@ -22,13 +22,13 @@ class App extends Component {
   componentWillMount () {
     // Firebase constantly looks for the user whether signed in or not
     this.unsubscribeAuth = auth.onAuthStateChanged(async user => {
-      console.log('Going in for auth')
       // If the user is signed in (meaning its not null)
       if (user) {
+        // We try to create that user in the database, If its present means we skip it
         const userDocumentReference = await createUserProfileDocument(user)
         // We see a real time snapshot data checker using onSnapshot
         userDocumentReference.onSnapshot(snapshot => {
-          this.setState({user: { id: snapshot.id, ...snapshot.data()}}, () => console.log(this.state))
+          this.setState({user: { id: snapshot.id, ...snapshot.data()}})
         })
       } else this.setState({ user: null })
     })
