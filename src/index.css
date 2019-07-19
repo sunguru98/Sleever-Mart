@@ -4,6 +4,8 @@
   box-sizing: border-box;
 }
 
+a:visited, a:link, a:active, a:hover { text-decoration: none; color: black }
+
 html { height: 100%; }
 body {
   margin: 0;

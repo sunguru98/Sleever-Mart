@@ -5,7 +5,7 @@ import { Link, withRouter } from 'react-router-dom'
 const PreviewCollectionListItem = ({ collection, match }) => {
   return (
     <div className='PreviewCollectionListItem'>
-      <Link style={{ textDecoration: 'none', color: 'black' }} to={`${match.url}/${collection.routeName}`}>
+      <Link to={`${match.url}/${collection.routeName}`}>
         <h1 className='PreviewCollectionListItem__title'>{collection.title}</h1>
       </Link>
       <div className='PreviewCollectionListItem__products'>
