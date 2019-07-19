@@ -7,7 +7,7 @@ import HomePage from './pages/HomePage'
 import ShopPage from './pages/ShopPage'
 import AuthPage from './pages/AuthPage'
 // Firebase auth component
-import { auth } from './firebase.config'
+import { auth, createUserProfileDocument } from './firebase.config'
 
 import { Switch, Route } from 'react-router-dom'
 class App extends Component {
@@ -21,9 +21,16 @@ class App extends Component {
 
   componentWillMount () {
     // Firebase constantly looks for the user whether signed in or not
-    this.unsubscribeAuth = auth.onAuthStateChanged(snapShot => {
-      this.setState({ user: snapShot })
-      console.log(snapShot)
+    this.unsubscribeAuth = auth.onAuthStateChanged(async user => {
+      console.log('Going in for auth')
+      // If the user is signed in (meaning its not null)
+      if (user) {
+        const userDocumentReference = await createUserProfileDocument(user)
+        // We see a real time snapshot data checker using onSnapshot
+        userDocumentReference.onSnapshot(snapshot => {
+          this.setState({user: { id: snapshot.id, ...snapshot.data()}}, () => console.log(this.state))
+        })
+      } else this.setState({ user: null })
     })
   }
 
