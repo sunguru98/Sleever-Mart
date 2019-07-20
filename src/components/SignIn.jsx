@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import FormInputComponent from './FormInputComponent'
 import CustomButton from './CustomButton'
 import '../styles/Signin.scss'
-import { auth, signInWithGoogle, createUserProfileDocument } from '../firebase.config';
+import { auth, signInWithGoogle } from '../firebase.config';
 
 class SignIn extends Component {
   constructor(props) {
