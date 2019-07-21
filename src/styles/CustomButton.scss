@@ -1,4 +1,6 @@
 .CustomButton {
+  display: flex;
+  justify-content: center;
   min-width: 165px;
   width: auto;
   letter-spacing: 0.5px;
@@ -20,9 +22,20 @@
     color: black;
     border-color: black;
   }
+
   &.google-btn {
     background: #4285f4;
     color: white;
     &:hover { background: #357ae8; border-color: transparent; }
+  }
+
+  &.inverted {
+    background: white;
+    color: black;
+    border-color: transparent;
+    &:hover {
+      background: black;
+      color: white;
+    }
   }
 }
