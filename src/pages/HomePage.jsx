@@ -1,6 +1,6 @@
 import React from 'react'
 import CategoryList from '../components/CategoryList'
-import '../styles/homepageStyles.scss'
+import '../styles/HomePage.scss'
 
 const HomePage = props => {
   const categories = [

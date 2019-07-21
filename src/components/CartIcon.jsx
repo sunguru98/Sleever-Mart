@@ -4,7 +4,7 @@ import { ReactComponent as ShoppingBag } from '../assets/shopping-bag.svg'
 
 const CartIcon = (props) => {
   return (
-    <div className='CartIcon'>
+    <div className='CartIcon' onClick={props.onClick}>
       <ShoppingBag className='CartIcon__ShoppingBag' />
       <span className='CartIcon__count'>0</span>
     </div>
