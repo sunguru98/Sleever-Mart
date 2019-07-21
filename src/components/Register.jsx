@@ -33,13 +33,15 @@ class Register extends Component {
       // Register in firebase under auth. The user details are in the property 'user', hence destructured
       const { user } = await auth.createUserWithEmailAndPassword(this.state.email, this.state.password)
       await createUserProfileDocument(user, {displayName: this.state.displayName})
+    } catch (err) { if (err.code === 'auth/email-already-in-use') alert('Email already in use. Please sign in with that email') }
+    finally {
       this.setState({
         displayName: '',
         email: '',
         password: '',
         cPassword: ''
       })
-    } catch (err) { console.error(err) }
+    }
   }
 
   render() { 

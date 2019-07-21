@@ -1,7 +1,11 @@
 import React from 'react'
+import CartIcon from '../components/CartIcon'
+import CartDropDown from '../components/CartDropDown'
 import '../styles/NavBar.scss'
-import { Link } from 'react-router-dom'
 import { ReactComponent as CrownLogo } from '../assets/crown.svg'
+// React router
+import { Link } from 'react-router-dom'
+// Firebase auth
 import { auth } from '../firebase.config'
 
 // Redux specific methods
@@ -28,10 +32,9 @@ const NavBar = ({ user }) => {
           <Link to='/auth' className='NavBar__auth'>SIGN IN</Link> : 
           <div onClick={() => auth.signOut()} to='/auth' className='NavBar__auth'>SIGN OUT</div>
         }
-        <span className='NavBar__shoppingcart'>
-          <img src='' alt='shoppingcart'/>
-        </span>
+        <CartIcon />
       </div>
+      <CartDropDown />
     </div>
   )
 }
