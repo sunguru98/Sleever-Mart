@@ -2,18 +2,19 @@ import React from 'react'
 import '../styles/CartIcon.scss'
 import { ReactComponent as ShoppingBag } from '../assets/shopping-bag.svg'
 import { connect } from 'react-redux'
+import { selectCartItemsCount } from '../redux/selectors/cartSelectors'
 
 const CartIcon = ({ onClick, cartItems }) => {
   return (
     <div className='CartIcon' onClick={onClick}>
       <ShoppingBag className='CartIcon__ShoppingBag' />
-      <span className='CartIcon__count'>{ cartItems.length }</span>
+      <span className='CartIcon__count'>{ cartItems }</span>
     </div>
   )
 }
 
-const mapStateToProps = ({ cart: { itemsInCart } }) => ({
-  cartItems: itemsInCart
+const mapStateToProps = state => ({
+  cartItems: selectCartItemsCount(state)
 })
  
 export default connect(mapStateToProps)(CartIcon)
