@@ -11,6 +11,9 @@ import { auth } from '../firebase.config'
 // Redux specific methods
 import { connect } from 'react-redux'
 import { showCartDropdown } from '../redux/actions/cartActions'
+import { createStructuredSelector } from 'reselect'
+import { selectUsersUser } from '../redux/selectors/userSelectors'
+import { selectCartDropDownHidden } from '../redux/selectors/cartSelectors'
 
 // A standard way of receiving props is via the parent component
 // But in redux, we acheive using a higher order component called connect,
@@ -43,9 +46,9 @@ const NavBar = ({ user, isHidden, showCartDropdown }) => {
 
 // This function ensures the component what props should have what state.
 // By returning an object, of the property name and value corresponding to the props and the specificReducer state respectively
-const mapStateToProps = rootReducerStateObj => ({
-  user: rootReducerStateObj.user.user, // First from rootReducer then to userReducer and then it accesses the user state
-  isHidden: rootReducerStateObj.cart.cartDropDownHidden
+const mapStateToProps = createStructuredSelector({
+  user: selectUsersUser,
+  isHidden: selectCartDropDownHidden
 })
 
 const mapDispatchToProps = dispatch => ({

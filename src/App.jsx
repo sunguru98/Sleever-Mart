@@ -6,11 +6,14 @@ import NavBar from './components/NavBar'
 import HomePage from './pages/HomePage'
 import ShopPage from './pages/ShopPage'
 import AuthPage from './pages/AuthPage'
+import CheckoutPage from './pages/CheckoutPage'
 // Firebase auth component
 import { auth, createUserProfileDocument } from './firebase.config'
 // Redux
 import { connect } from 'react-redux'
 import { setUser } from './redux/actions/userActions'
+import { createStructuredSelector } from 'reselect'
+import { selectUsersUser } from './redux/selectors/userSelectors'
 // React Router 
 import { Switch, Route, Redirect } from 'react-router-dom'
 class App extends Component {
@@ -46,6 +49,7 @@ class App extends Component {
          <Route exact path='/' component={HomePage} />
          <Route exact path='/shop' component={ShopPage} />
          <Route exact path='/auth' render={() => this.props.user ? <Redirect to='/' /> : <AuthPage /> }/>
+         <Route exact path='/checkout' component={CheckoutPage}  />
         </Switch>
       </div>
     );
@@ -59,7 +63,9 @@ class App extends Component {
 // (dispatch means an order given to release an action to the reducer)
 // That dispatch method gets as a prop here.
 
-const mapStateToProps = ({ user }) => ({ user: user.user })
+const mapStateToProps = createStructuredSelector({
+  user: selectUsersUser
+})
 
 const mapDispatchToProps = dispatch => ({
   // Note that the setUser prop is different from the setUser function which is passed as param in dispatch

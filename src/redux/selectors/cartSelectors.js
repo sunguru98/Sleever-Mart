@@ -14,6 +14,8 @@ import { createSelector } from 'reselect'
 export const selectCart = state => state.cart
 // Using the above input selector, we use createSelector which accpets an array of inputSelectors and an
 // output selector which returns cartItems
+export const selectCartDropDownHidden = createSelector([selectCart], cartState => cartState.cartDropDownHidden)
 export const selectCartItems = createSelector([selectCart], cartState => cartState.itemsInCart)
 // And using this selectCartItems, we again pass inside createSelector to return the cartItems
 export const selectCartItemsCount = createSelector([selectCartItems], cartItems => cartItems.reduce((acc, cartItem) => acc + cartItem.quantity, 0))
+export const selectCartItemsPrice = createSelector([selectCartItems], cartItems => cartItems.reduce((acc, cartItem) => acc + (cartItem.quantity * cartItem.price), 0))
