@@ -14,7 +14,7 @@ const CartCheckoutListItem = ({ cartItem, removeItemFromCart, incrementCart, dec
       <span className='CartCheckOutListItem__name'>{cartItem.name}</span>
       <div className='CartCheckOutListItem__quantity'>
         <span onClick={updateQuantity} data-type='decrement' className='CartChecOutListItem__quantity-arrow CartChecOutListItem__quantity-arrow--larrow' style={{ marginRight: '10px', cursor: 'pointer' }}>&#10094;</span>
-        {cartItem.quantity} { console.log('Hi there') }
+        {cartItem.quantity}
         <span onClick={updateQuantity} data-type='increment' className='CartChecOutListItem__quantity-arrow CartChecOutListItem__quantity-arrow--rarrow' style={{ marginLeft: '10px', cursor: 'pointer' }}>&#10095;</span>
       </div>
       <span className='CartCheckOutListItem__price'>{cartItem.price}$</span>

@@ -1,7 +1,10 @@
+// Redux-persist allows us to store into localStorage
+import { persistStore } from 'redux-persist'
 import rootReducer from './rootReducer'
 // The store file where containing all the states
 import {createStore, applyMiddleware} from 'redux'
 import logger from 'redux-logger'
+
 // The root reducer did all the combination of mini reducer's states and ready to pass into the store
 
 // The middleware contribution comes in between the action and the Root reducer.
@@ -14,8 +17,9 @@ const middlewares = [logger]
 // We now create a store using createStore(), It takes in the root reducer which prepared to send the state here,
 // And any additional middlewares which are spread out inside the applyMiddleware()
 const store = createStore(rootReducer, applyMiddleware(...middlewares))
+const persistedStore = persistStore(store)
 
-export default store
+export default { persistedStore, store }
 
 
 
