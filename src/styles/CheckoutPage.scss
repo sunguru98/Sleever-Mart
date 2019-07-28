@@ -28,4 +28,13 @@
     margin-left: auto;
     font-size: 36px;
   }
+
+  &__paybtn { margin-left: auto; }
+
+  &__payment-info {
+    color: red;
+    font-size: 35px;
+    margin: 20px 0;
+    text-align: center;
+  }
 }

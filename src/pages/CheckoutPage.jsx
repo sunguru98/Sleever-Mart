@@ -1,6 +1,7 @@
 import React from 'react'
 import '../styles/CheckoutPage.scss'
 import CartCheckoutList from '../components/CartCheckOutList'
+import StripeButton from '../components/StripeButton'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { selectCartItemsPrice } from '../redux/selectors/cartSelectors.js'
@@ -27,6 +28,8 @@ const CheckoutPage = ({ cartTotalPrice }) => {
       </div>
       <CartCheckoutList />
       <div className='CheckoutPage__total'>Total: ${ cartTotalPrice }</div>
+      <div className='CheckoutPage__payment-info'>*** USE 4242 4242 4242 4242 as card number and any future date as expiry ***</div>
+      <StripeButton price={ cartTotalPrice }/>
     </div>
   )
 }
