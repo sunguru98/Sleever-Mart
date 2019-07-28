@@ -7,7 +7,8 @@ import { selectCollectionsCollections } from '../redux/selectors/collectionSelec
 const PreviewCollectionList = ({ collections }) => {
   return (
     <div className='PreviewCollectionList' style={{ marginTop: 20 }}>
-      { collections.map(collection => <PreviewCollectionListItem key={collection.id} collection={collection} />) }
+      { console.log(collections)}
+      { Object.values(collections).map(collection => <PreviewCollectionListItem key={collection.id} collection={collection} />) }
     </div>
   );
 }

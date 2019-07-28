@@ -3,6 +3,7 @@ import { combineReducers } from 'redux'
 // Persist reducer is a built in method to store the reducer state in to the local storage
 import { persistReducer } from 'redux-persist'
 import lcStorage from 'redux-persist/lib/storage'
+// All reducers
 import userReducer from './reducers/userReducer'
 import cartReducer from './reducers/cartReducer'
 import categoriesReducer from './reducers/categoriesReducer'
