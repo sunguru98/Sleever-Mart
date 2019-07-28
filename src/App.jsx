@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage'
 import ShopPage from './pages/ShopPage'
 import AuthPage from './pages/AuthPage'
 import CheckoutPage from './pages/CheckoutPage'
+import CategoryPage from './pages/CategoryPage'
 // Firebase auth component
 import { auth, createUserProfileDocument } from './firebase.config'
 // Redux
@@ -48,6 +49,7 @@ class App extends Component {
         <Switch>
          <Route exact path='/' component={HomePage} />
          <Route exact path='/shop' component={ShopPage} />
+         <Route exact path='/shop/:categoryId' component={CategoryPage} />
          <Route exact path='/auth' render={() => this.props.user ? <Redirect to='/' /> : <AuthPage /> }/>
          <Route exact path='/checkout' component={CheckoutPage}  />
         </Switch>

@@ -1,11 +1,17 @@
 import React from 'react'
 import PreviewCollectionListItem from './PreviewCollectionListItem'
-const PreviewCollectionList = ({collections}) => {
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { selectCollectionsCollections } from '../redux/selectors/collectionSelectors'
+
+const PreviewCollectionList = ({ collections }) => {
   return (
     <div className='PreviewCollectionList' style={{ marginTop: 20 }}>
       { collections.map(collection => <PreviewCollectionListItem key={collection.id} collection={collection} />) }
     </div>
   );
 }
- 
-export default PreviewCollectionList;
+
+const mapStateToProps = createStructuredSelector({ collections: selectCollectionsCollections })
+
+export default connect(mapStateToProps)(PreviewCollectionList)

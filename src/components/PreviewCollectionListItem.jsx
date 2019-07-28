@@ -6,7 +6,7 @@ const PreviewCollectionListItem = ({ collection, match }) => {
   return (
     <div className='PreviewCollectionListItem'>
       <Link to={`${match.url}/${collection.routeName}`}>
-        <h1 className='PreviewCollectionListItem__title'>{collection.title}</h1>
+        <h1 className='PreviewCollectionListItem__title'>{collection.title.toUpperCase()}</h1>
       </Link>
       <div className='PreviewCollectionListItem__products'>
         <ProductItem item={collection.items[0]}/>
