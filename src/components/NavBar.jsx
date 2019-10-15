@@ -1,10 +1,11 @@
+// Core
 import React from 'react'
 import CartIcon from '../components/CartIcon'
 import CartDropDown from '../components/CartDropDown'
-import '../styles/NavBar.scss'
+// styles
+import { NavBarContainer, NavBarLogoContainer, NavBarLinksContainer, NavBarLinkDiv, NavBarLinkRouter } from '../jsStyles/NavBarStyles'
+// Assets
 import { ReactComponent as CrownLogo } from '../assets/crown.svg'
-// React router
-import { Link } from 'react-router-dom'
 // Firebase auth
 import { auth } from '../firebase.config'
 
@@ -25,22 +26,22 @@ import { selectCartDropDownHidden } from '../redux/selectors/cartSelectors'
 const NavBar = ({ user, isHidden, showCartDropdown }) => {
   const handleClick = () => { showCartDropdown(!isHidden) }
   return (
-    <div className='NavBar'>
-      <Link to='/' className='NavBar__logo-container'>
+    <NavBarContainer>
+      <NavBarLogoContainer to='/'>
         <CrownLogo className='NavBar__logo' />
-      </Link>
-      <div className='NavBar__links'>
-        <Link to='/shop' className='NavBar__shop'>SHOP</Link>
-        <Link to='/contact' className='NavBar__contact'>CONTACT</Link>
+      </NavBarLogoContainer>
+      <NavBarLinksContainer>
+        <NavBarLinkRouter to='/shop'>SHOP</NavBarLinkRouter>
+        <NavBarLinkRouter to='/contact'>CONTACT</NavBarLinkRouter>
 
         { !user ? 
-          <Link to='/auth' className='NavBar__auth'>SIGN IN</Link> : 
-          <div onClick={() => auth.signOut()} to='/auth' className='NavBar__auth'>SIGN OUT</div>
+          <NavBarLinkRouter to='/auth'>SIGN IN</NavBarLinkRouter> : 
+          <NavBarLinkDiv onClick={() => auth.signOut()} to='/auth'>SIGN OUT</NavBarLinkDiv>
         }
         <CartIcon onClick={handleClick} />
-      </div>
+      </NavBarLinksContainer>
       { !isHidden && <CartDropDown /> }
-    </div>
+    </NavBarContainer>
   )
 }
 

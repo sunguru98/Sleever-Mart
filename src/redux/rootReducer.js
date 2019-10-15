@@ -1,4 +1,4 @@
-// Combine reducers allows us to map all the small reducers into a giant reducer (like modules in VUEX)
+ // Combine reducers allows us to map all the small reducers into a giant reducer (like modules in VUEX)
 import { combineReducers } from 'redux'
 // Persist reducer is a built in method to store the reducer state in to the local storage
 import { persistReducer } from 'redux-persist'

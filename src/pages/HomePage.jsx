@@ -1,16 +1,19 @@
 import React from 'react'
 import CategoryList from '../components/CategoryList'
-import '../styles/HomePage.scss'
+
+// Redux
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { selectCategoriesCategories } from '../redux/selectors/categorySelectors'
 
+// Styles
+import { HomePageContainer } from '../jsStyles/HomePageStyles'
 
 const HomePage = ({ categories }) => {
   return (
-    <div className='Homepage'>
+    <HomePageContainer>
       <CategoryList categories={categories} />
-    </div>
+    </HomePageContainer>
   )
 }
 
