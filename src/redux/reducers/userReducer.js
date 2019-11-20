@@ -1,7 +1,8 @@
 import userActionTypes from '../actionTypes/userActionTypes'
 // Each specific reducer must have an initial state, just like how state has in a component
 const userState = {
-  user: null
+  user: null,
+  error: null
 }
 
 // A reducer is like an action and a mutation (VUEX) thing combined
@@ -13,8 +14,12 @@ const userState = {
 
 const userReducer = (currentState = userState, action) => {
   switch (action.type) {
-    case userActionTypes.SET_USER: return { ...currentState, user: action.payload } 
-    default: return currentState
+    case userActionTypes.SET_USER:
+      return { ...currentState, user: action.payload, error: null }
+    case userActionTypes.SET_AUTH_ERROR:
+      return { ...currentState, error: action.payload }
+    default:
+      return currentState
   }
 }
 

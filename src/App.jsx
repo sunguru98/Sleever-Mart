@@ -8,8 +8,7 @@ import ShopPage from './pages/ShopPage'
 import AuthPage from './pages/AuthPage'
 import CheckoutPage from './pages/CheckoutPage'
 import CategoryPage from './pages/CategoryPage'
-// Firebase auth component
-import { auth, createUserProfileDocument } from './firebase.config'
+
 // Redux
 import { connect } from 'react-redux'
 import { setUser } from './redux/actions/userActions'
@@ -18,30 +17,6 @@ import { selectUsersUser } from './redux/selectors/userSelectors'
 // React Router 
 import { Switch, Route, Redirect } from 'react-router-dom'
 class App extends Component {
-  // For closing the auth subscription when app is unmounted
-  unsubscribeAuth = null
-
-  componentWillMount () {
-    const { setUser } = this.props
-    // Firebase constantly looks for the user whether signed in or not
-    this.unsubscribeAuth = auth.onAuthStateChanged(async user => {
-      // If the user is signed in (meaning its not null)
-      if (user) {
-        // We try to create that user (in a form of document) in the database (users collection), If its present means we skip it
-        const userDocumentReference = await createUserProfileDocument(user)
-        // We see a real time snapshot data checker using onSnapshot
-        userDocumentReference.onSnapshot(snapshot => {
-          // Redux action setUser, instead of this.setState({})
-          setUser({ id: snapshot.id, ...snapshot.data() })
-        })
-      } else setUser(null)
-    })
-  }
-
-  componentWillUnmount () {
-    this.unsubscribeAuth()
-  }
-
   render () {
     return (
       <div className="App">

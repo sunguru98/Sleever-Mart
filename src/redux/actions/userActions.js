@@ -5,3 +5,12 @@ export const setUser = userObj => ({
   type: userActionTypes.SET_USER, // This is exactly like a mutation in VUEX where we commit using a name
   payload: userObj
 })
+
+export const signInEmail = (email, password) => ({
+  type: userActionTypes.SIGNIN_EMAIL,
+  payload: { email, password }
+})
+
+export const signInGoogle = () => ({
+  type: userActionTypes.SIGNIN_GOOGLE
+})
