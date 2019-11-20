@@ -1,5 +1,9 @@
 import cartActionTypes from '../actionTypes/cartActionTypes'
 
+export const clearCart = () => ({
+  type: cartActionTypes.CLEAR_CART
+})
+
 export const showCartDropdown = displayStatus => ({
   type: cartActionTypes.SHOW_CART_DROPDOWN,
   payload: displayStatus

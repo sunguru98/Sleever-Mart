@@ -9,6 +9,34 @@ import {
 
 import { setUser } from '../actions/userActions'
 
+export function* onRegister() {
+  yield takeLatest(userActionTypes.REGISTER_USER, function*({
+    payload: { email, password, displayName }
+  }) {
+    console.log('Hi')
+    try {
+      const { user } = yield auth.createUserWithEmailAndPassword(
+        email,
+        password
+      )
+      const userReference = yield createUserProfileDocument(user, {
+        displayName
+      })
+      const snapshot = yield userReference.get()
+      yield put(setUser({ id: snapshot.id, ...snapshot.data }))
+      return true
+    } catch (err) {
+      if (err.code === 'auth/email-already-in-use') {
+        alert(
+          'Email already exists. Please register with a new email, or signin'
+        )
+      }
+      yield put({ type: userActionTypes.SET_AUTH_ERROR, payload: err.message })
+      return false
+    }
+  })
+}
+
 export function* onSignInEmail() {
   yield takeLatest(userActionTypes.SIGNIN_EMAIL, function*({
     payload: { email, password }
@@ -71,6 +99,7 @@ export default function*() {
     call(onGetCurrentUser),
     call(onSignInEmail),
     call(onSignInGoogle),
-    call(onSignOut)
+    call(onSignOut),
+    call(onRegister)
   ])
 }
