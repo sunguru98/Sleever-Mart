@@ -11,12 +11,16 @@ import CategoryPage from './pages/CategoryPage'
 
 // Redux
 import { connect } from 'react-redux'
-import { setUser } from './redux/actions/userActions'
+import { setUser, getCurrentUser } from './redux/actions/userActions'
 import { createStructuredSelector } from 'reselect'
 import { selectUsersUser } from './redux/selectors/userSelectors'
 // React Router 
 import { Switch, Route, Redirect } from 'react-router-dom'
 class App extends Component {
+  componentDidMount () {
+    this.props.getCurrentUser()
+  }
+
   render () {
     return (
       <div className="App">
@@ -47,7 +51,8 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = dispatch => ({
   // Note that the setUser prop is different from the setUser function which is passed as param in dispatch
   // The first is just a prop name, where as the second is the actual user Action
-  setUser: userObj => dispatch(setUser(userObj))
+  setUser: userObj => dispatch(setUser(userObj)),
+  getCurrentUser: () => dispatch(getCurrentUser())
 })
 
 // Remember these all will work only if the Provider component is surrounded in 'index.js'

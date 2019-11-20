@@ -3,10 +3,26 @@ import userActionTypes from '../actionTypes/userActionTypes'
 import {
   auth,
   googleAuthProvider,
-  createUserProfileDocument
+  createUserProfileDocument,
+  getCurrentUser
 } from '../../firebase.config'
 
 import { setUser } from '../actions/userActions'
+
+function* getCurrentUserAsync() {
+  try {
+    console.log('Hi there')
+    const userAuth = yield call(getCurrentUser)
+    if (!userAuth) return
+    const userReference = yield call(createUserProfileDocument, userAuth)
+    const snapshot = yield userReference.get()
+    yield put(setUser({ id: snapshot.id, ...snapshot.data }))
+  } catch (err) {
+    console.log(err)
+    yield put({ type: userActionTypes.SET_AUTH_ERROR, payload: err.message })
+    yield put(setUser(null))
+  }
+}
 
 function* signInEmailAsync({ payload: { email, password } }) {
   try {
@@ -39,4 +55,8 @@ export function* onSignInEmail() {
 
 export function* onSignInGoogle() {
   yield takeLatest(userActionTypes.SIGNIN_GOOGLE, signInGoogleAsync)
+}
+
+export function* onGetCurrentUser() {
+  yield takeLatest(userActionTypes.GET_CURRENT_USER, getCurrentUserAsync)
 }

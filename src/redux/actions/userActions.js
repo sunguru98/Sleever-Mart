@@ -6,6 +6,10 @@ export const setUser = userObj => ({
   payload: userObj
 })
 
+export const getCurrentUser = () => ({
+  type: userActionTypes.GET_CURRENT_USER
+})
+
 export const signInEmail = (email, password) => ({
   type: userActionTypes.SIGNIN_EMAIL,
   payload: { email, password }

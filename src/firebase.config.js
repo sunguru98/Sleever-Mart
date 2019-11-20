@@ -22,6 +22,13 @@ googleAuthProvider.setCustomParameters({ prompt: 'select_account' })
 
 export const signInWithGoogle = () => auth.signInWithPopup(googleAuthProvider)
 
+export const getCurrentUser = () => new Promise((resolve, reject) => {
+  const unsubscribeAuth = auth.onAuthStateChanged(userAuth => {
+     unsubscribeAuth()
+     resolve(userAuth)
+  }, reject)
+})
+
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   // userAuth refers to the onAuthStateObject or the createUsingEmailAndPassword which firebase returns
   if (!userAuth) return
