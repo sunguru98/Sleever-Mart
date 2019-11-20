@@ -1,11 +1,8 @@
 import { all, call } from 'redux-saga/effects'
 
-import { onSignInGoogle, onSignInEmail, onGetCurrentUser } from './sagas/userSagas'
+import userSagas from './sagas/userSagas'
+// import cartSagas from './sagas/cartSagas'
 
-export default function* () {
-  yield all([
-    call(onSignInEmail),
-    call(onSignInGoogle),
-    call(onGetCurrentUser)
-  ])
+export default function*() {
+  yield all([call(userSagas)])
 }

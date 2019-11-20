@@ -18,3 +18,7 @@ export const signInEmail = (email, password) => ({
 export const signInGoogle = () => ({
   type: userActionTypes.SIGNIN_GOOGLE
 })
+
+export const signOut = () => ({
+  type: userActionTypes.SIGN_OUT
+})

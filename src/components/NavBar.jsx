@@ -6,14 +6,13 @@ import CartDropDown from '../components/CartDropDown'
 import { NavBarContainer, NavBarLogoContainer, NavBarLinksContainer, NavBarLinkDiv, NavBarLinkRouter } from '../jsStyles/NavBarStyles'
 // Assets
 import { ReactComponent as CrownLogo } from '../assets/crown.svg'
-// Firebase auth
-import { auth } from '../firebase.config'
 
 // Redux specific methods
 import { connect } from 'react-redux'
 import { showCartDropdown } from '../redux/actions/cartActions'
 import { createStructuredSelector } from 'reselect'
 import { selectUsersUser } from '../redux/selectors/userSelectors'
+import { signOut } from '../redux/actions/userActions'
 import { selectCartDropDownHidden } from '../redux/selectors/cartSelectors'
 
 // A standard way of receiving props is via the parent component
@@ -23,7 +22,7 @@ import { selectCartDropDownHidden } from '../redux/selectors/cartSelectors'
 // And root reducer is made visible to components via the Provider component attached in the index.js
 // By this helper method, We can now access the reducer and passIn props directly, hence the name mapStateToProps
 
-const NavBar = ({ user, isHidden, showCartDropdown }) => {
+const NavBar = ({ user, isHidden, showCartDropdown, signOut }) => {
   const handleClick = () => { showCartDropdown(!isHidden) }
   return (
     <NavBarContainer>
@@ -36,7 +35,7 @@ const NavBar = ({ user, isHidden, showCartDropdown }) => {
 
         { !user ? 
           <NavBarLinkRouter to='/auth'>SIGN IN</NavBarLinkRouter> : 
-          <NavBarLinkDiv onClick={() => auth.signOut()} to='/auth'>SIGN OUT</NavBarLinkDiv>
+          <NavBarLinkDiv onClick={signOut} to='/auth'>SIGN OUT</NavBarLinkDiv>
         }
         <CartIcon onClick={handleClick} />
       </NavBarLinksContainer>
@@ -53,7 +52,8 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const mapDispatchToProps = dispatch => ({
-  showCartDropdown: boolVal => dispatch(showCartDropdown(boolVal))
+  showCartDropdown: boolVal => dispatch(showCartDropdown(boolVal)),
+  signOut: () => dispatch(signOut())
 })
 
 // connect is a Higher order component, which takes in two arguments
